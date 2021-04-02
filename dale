@@ -1,0 +1,124 @@
+#!/bin/sh
+
+
+FOLDER_NAME=$1
+
+  mkdir $FOLDER_NAME
+  cd $FOLDER_NAME
+  mkdir app
+  mkdir tests
+  echo "from flask import Flask
+
+def create_app():
+    app = Flask(_name_)
+
+    return app
+
+" > app/_init_.py
+
+  touch tests/_init_.py
+
+  echo "DEBUG=true
+FLASK_ENV=development
+" > .env
+
+  echo "DEBUG=true
+FLASK_ENV=development
+" > .env.example
+
+  echo "# https://editorconfig.org/
+
+root = true
+
+[*]
+indent_style = space
+indent_size = 4
+insert_final_newline = false
+trim_trailing_whitespace = true
+end_of_line = lf
+charset = utf-8
+
+# Docstrings and comments use max_line_length = 79
+[*.py]
+max_line_length = 79
+
+# Use 2 spaces for the HTML files
+[*.html]
+indent_size = 2
+
+# The JSON files contain newlines inconsistently
+[*.json]
+indent_size = 2
+insert_final_newline = ignore
+
+[*/admin/js/vendor/*]
+indent_style = ignore
+indent_size = ignore
+
+# Minified JavaScript files shouldn't be changed
+[**.min.js]
+indent_style = ignore
+insert_final_newline = ignore
+
+# Makefiles always use tabs for indentation
+[Makefile]
+indent_style = tab
+
+# Batch files use tabs for indentation
+[*.bat]
+indent_style = tab
+
+[docs/**.txt]
+max_line_length = 79
+
+
+[*.js]
+indent_size = 4
+" > .editorconfig
+
+  echo ".editorconfig
+venv
+.env
+pytest_cache
+**_pycache_
+" > .gitignore
+
+  echo "alembic==1.4.3
+attrs==20.3.0
+autopep8==1.5.4
+click==7.1.2
+environs==9.2.0
+flake8==3.8.4
+Flask==1.1.2
+flask-marshmallow==0.14.0
+Flask-Migrate==2.5.3
+Flask-SQLAlchemy==2.4.4
+iniconfig==1.1.1
+itsdangerous==1.1.0
+Jinja2==2.11.3
+Mako==1.1.3
+MarkupSafe==1.1.1
+marshmallow==3.9.1
+mccabe==0.6.1
+packaging==20.4
+pluggy==0.13.1
+py==1.9.0
+pycodestyle==2.6.0
+pyflakes==2.2.0
+pyparsing==2.4.7
+pytest==6.1.2
+python-dateutil==2.8.1
+python-editor==1.0.4
+six==1.15.0
+SQLAlchemy==1.3.20
+toml==0.10.2
+Werkzeug==1.0.1
+" > requirements.txt
+
+python -m venv venv
+
+echo "seu projeto foi criado com sucesso"
+echo "agora entre na pasta com cd $FOLDER_NAME "
+echo "execute o comando source venv/bin/activate"
+echo "e execute o comando dale"
+echo "e por ultimo flask run :)"
